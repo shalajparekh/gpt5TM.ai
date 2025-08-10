@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -11,14 +12,9 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-black/10 dark:border-white/10">
       <div className="mx-auto max-w-7xl px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="tracking-tight" style={{ fontFamily: 'var(--font-geist-sans)' }}>
+        <Link href="/" className="tracking-tight" aria-label="TechMaadi.ai home" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <span className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-extrabold text-lg md:text-xl">
-            <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" className="drop-shadow-sm">
-              <path d="M12 3.25v1.5M7.5 4.5l-1-1M16.5 4.5l1-1" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M4 4h16a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-7.5L9 20.5V15H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
-              <circle cx="9.5" cy="9.5" r="1.25" fill="currentColor"/>
-              <circle cx="14.5" cy="9.5" r="1.25" fill="currentColor"/>
-            </svg>
+            <Image src="/tm.png" alt="TechMaadi.ai" width={28} height={28} className="h-7 w-auto" priority />
             TechMaadi.ai
           </span>
         </Link>
