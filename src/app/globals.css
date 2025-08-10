@@ -24,3 +24,60 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Subtle grid + radial gradient background for hero */
+.bg-grid {
+  background-image: linear-gradient(var(--grid-line, rgba(0,0,0,0.06)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line, rgba(0,0,0,0.06)) 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
+  background-position: -1px -1px, -1px -1px;
+}
+
+.bg-radial {
+  background: radial-gradient(1200px circle at 10% -20%, rgba(34,197,94,0.15), transparent 40%),
+    radial-gradient(1000px circle at 90% -10%, rgba(99,102,241,0.15), transparent 35%);
+}
+
+.dark .bg-grid {
+  --grid-line: rgba(255,255,255,0.08);
+}
+
+/* typing caret */
+.typing-caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  background: currentColor;
+  margin-left: 0.12em;
+  transform: translateY(0.1em);
+  animation: caretBlink 1s step-end infinite;
+}
+
+@keyframes caretBlink {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+/* hide horizontal scrollbars for carousels with class no-scrollbar */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.chat-typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  display: inline-block;
+  margin: 0 2px;
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+.delay-150 { animation-delay: 0.15s; }
+.delay-300 { animation-delay: 0.3s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.6; }
+  40% { transform: translateY(-3px); opacity: 1; }
+}
