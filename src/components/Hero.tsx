@@ -34,15 +34,16 @@ export default function Hero() {
 
             {/* Right: visual panel */}
             <div className="relative lg:col-span-5 min-h-[520px] md:min-h-[640px]">
-              <Image
-                src="https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&auto=format&fit=crop&w=1400&h=1000"
-                alt="Tech growth visuals"
-                fill
-                sizes="(min-width: 1024px) 40vw, 100vw"
-                className="object-cover"
-                priority
+              <video
+                src="/techmaadi.mp4"
+                className="absolute inset-0 h-full w-full object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls={false}
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#0a5bd3]/10 via-transparent to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#0a5bd3]/20 via-transparent to-transparent" />
             </div>
           </div>
         </div>
