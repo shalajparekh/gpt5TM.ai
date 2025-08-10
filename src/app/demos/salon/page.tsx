@@ -10,7 +10,7 @@ export default function SalonDemoPage() {
       {/* Hero */}
       <section className="relative isolate overflow-hidden">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-rose-50 to-white" />
-        <div className="mx-auto max-w-7xl px-4 py-16 md:py-24">
+        <div className="mx-auto max-w-7xl px-4 py-24 md:py-32">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-8">
             <div>
               <p className="text-sm tracking-widest text-rose-500">
@@ -30,12 +30,15 @@ export default function SalonDemoPage() {
                 <a href="#book" className="rounded-full px-5 py-2.5 border border-black/10">Book Appointment</a>
               </div>
             </div>
-            <div className="relative h-64 md:h-96 rounded-3xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1400&q=80"
-                alt="Premium salon styling"
+            <div className="relative h-[360px] md:h-[540px] rounded-3xl overflow-hidden shadow-xl">
+              <video
+                src="/Salon.mp4"
                 className="absolute inset-0 h-full w-full object-cover"
-                loading="eager"
+                autoPlay
+                muted
+                loop
+                playsInline
+                controls={false}
               />
             </div>
           </div>
