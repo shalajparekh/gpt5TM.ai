@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { motion } from "framer-motion";
 
 const testimonials = [
-  { name: "Rohan S.", role: "Cafe Owner, Indiranagar", company: "ATLASIAN", text: "TechMaadi launched our site in days. Online orders up 34%.", img: "https://images.unsplash.com/photo-1602471615287-9971f874f24e?q=80&auto=format&fit=crop&w=900&h=900" },
+  { name: "Rohan S.", role: "Cafe Owner, Indiranagar", company: "ATLASIAN", text: "TechMaadi launched our site in days. Online orders up 34%.", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&auto=format&fit=crop&w=900&h=900" },
   { name: "Priya K.", role: "Boutique, Koramangala", company: "ATLASIAN", text: "WhatsApp catalog + UPI payments made sales effortless.", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&auto=format&fit=crop&w=900&h=900" },
   { name: "Arjun M.", role: "Fitness Studio, HSR", company: "ATLASIAN", text: "Ads + SEO brought steady leads. Clear weekly reports.", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&auto=format&fit=crop&w=900&h=900" },
   { name: "Neha T.", role: "Bakery, Jayanagar", company: "ATLASIAN", text: "Cart recovery emails recovered 18% revenue.", img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&auto=format&fit=crop&w=900&h=900" },
