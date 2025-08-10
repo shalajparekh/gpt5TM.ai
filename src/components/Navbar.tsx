@@ -1,8 +1,13 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [demosOpen, setDemosOpen] = useState(false);
+  const close = () => setOpen(false);
+
   return (
     <div className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-black/10 dark:border-white/10">
       <div className="mx-auto max-w-7xl px-4 h-20 flex items-center justify-between">
@@ -17,6 +22,7 @@ export default function Navbar() {
             TechMaadi.ai
           </span>
         </Link>
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <motion.div whileHover={{ y: -2 }}>
             <Link href="#services" className="hover:opacity-80 font-semibold">Services</Link>
@@ -49,7 +55,20 @@ export default function Navbar() {
             <Link href="#contact" className="hover:opacity-80 font-semibold">Contact</Link>
           </motion.div>
         </nav>
-        <div className="flex items-center gap-3">
+        {/* Mobile hamburger */}
+        <button
+          className="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-xl border border-black/10"
+          aria-label={open ? "Close menu" : "Open menu"}
+          onClick={() => setOpen((v) => !v)}
+        >
+          {open ? (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          ) : (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+          )}
+        </button>
+
+        <div className="hidden md:flex items-center gap-3">
           <Link
             href="#contact"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
@@ -59,6 +78,45 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+
+      {/* Mobile menu panel */}
+      {open && (
+        <div className="md:hidden border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/60 backdrop-blur">
+          <div className="mx-auto max-w-7xl px-4 py-4 space-y-2" style={{ fontFamily: 'var(--font-geist-sans)' }}>
+            <Link href="#services" className="block py-2 font-semibold" onClick={close}>Services</Link>
+            <Link href="#testimonials" className="block py-2 font-semibold" onClick={close}>Testimonials</Link>
+            <Link href="/pricing" className="block py-2 font-semibold" onClick={close}>Pricing</Link>
+
+            {/* App Demos collapsible */}
+            <button
+              className="w-full text-left py-2 font-semibold inline-flex items-center justify-between"
+              onClick={() => setDemosOpen((v) => !v)}
+              aria-expanded={demosOpen}
+            >
+              <span>App Demos</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`${demosOpen ? 'rotate-180' : ''} transition-transform`}><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            {demosOpen && (
+              <div className="pl-3 space-y-2">
+                <Link href="/demos/salon" className="block py-2" onClick={close}>Salons, Spa, Wellness Center Demo</Link>
+                <Link href="/demos/cafe" className="block py-2" onClick={close}>Cafés / Cloud Kitchens Demo</Link>
+                <Link href="/demos/fashion" className="block py-2" onClick={close}>Fashion Boutiques Demo</Link>
+              </div>
+            )}
+
+            <Link href="#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
+            <div className="pt-2">
+              <Link
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                onClick={close}
+              >
+                Get proposal
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
