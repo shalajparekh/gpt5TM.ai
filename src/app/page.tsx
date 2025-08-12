@@ -9,11 +9,12 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Hero />
+      <div className="h-8 md:h-12" />
+      <CalendarSection />
       <ServicesSection />
       <USPCarousel />
       <Testimonials />
       <ContactSection />
-      <CalendarSection />
     </div>
   );
 }
