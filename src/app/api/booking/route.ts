@@ -58,7 +58,7 @@ export async function GET(req: Request) {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, phone, notes, startISO, durationMinutes = 30, whatsappTo, whatsappFrom, source } = body || {};
+    const { name, email, phone, notes, startISO, durationMinutes = 30, source } = body || {};
     if (!name || !startISO) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
@@ -69,7 +69,7 @@ export async function POST(req: Request) {
     const end = new Date(start.getTime() + (Number(durationMinutes) || 30) * 60000);
 
     // Sheets-only capture
-    let createdId: string = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    const createdId: string = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
 
     // Append to Google Sheets with detailed errors
     try {
@@ -126,11 +126,11 @@ export async function POST(req: Request) {
         insertDataOption: "INSERT_ROWS",
         requestBody: { values },
       });
-    } catch (err) {
-      const anyErr = err as any;
-      const googleMsg = anyErr?.errors?.[0]?.message || anyErr?.response?.data?.error?.message;
-      const message = anyErr?.message || googleMsg || "Failed to append to Google Sheets";
-      console.error("Sheets append error:", anyErr);
+    } catch (err: unknown) {
+      const e = err as { message?: string; errors?: Array<{ message?: string }>; response?: { data?: { error?: { message?: string } } } };
+      const googleMsg = e?.errors?.[0]?.message || e?.response?.data?.error?.message;
+      const message = e?.message || googleMsg || "Failed to append to Google Sheets";
+      console.error("Sheets append error:", e);
       return NextResponse.json({ error: message }, { status: 500 });
     }
 
