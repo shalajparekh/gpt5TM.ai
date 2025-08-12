@@ -1,8 +1,7 @@
 "use client";
 
-const WA_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "91XXXXXXXXXX"; // e.g., 91XXXXXXXXXX
-const MESSAGE = encodeURIComponent("Hi TechMaadi.ai, I'd like to discuss my project.");
-const waUrl = `https://wa.me/${WA_NUMBER}?text=${MESSAGE}`;
+// Open WhatsApp Web in a new tab as requested
+const waUrl = "https://web.whatsapp.com/";
 
 export default function WhatsAppButton() {
   return (
