@@ -1,4 +1,4 @@
-// Note: avoid strict typing here to support multiple NextAuth versions
+import type { AuthOptions, SessionStrategy } from "next-auth";
 import Google from "next-auth/providers/google";
 
 async function appendUserToSheet(params: {
@@ -40,20 +40,20 @@ async function appendUserToSheet(params: {
   await sheets.spreadsheets.values.append({ spreadsheetId, range: `${title}!A1`, valueInputOption: "RAW", insertDataOption: "INSERT_ROWS", requestBody: { values } });
 }
 
-export const authConfig = {
+export const authConfig: AuthOptions = {
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  session: { strategy: "jwt" },
+  session: { strategy: "jwt" as SessionStrategy },
   trustHost: true,
   pages: {
     signIn: "/", // we invoke signIn() from navbar; fallback to home
   },
   callbacks: {
-    async jwt({ token, account, profile }) {
+    async jwt({ token, account, profile }: any) {
       if (account && profile) {
         const typedProfile = profile as { name?: string; email?: string; picture?: string };
         token.name = typedProfile.name;
@@ -62,7 +62,7 @@ export const authConfig = {
       }
       return token;
     },
-    async session({ session, token }) {
+    async session({ session, token }: any) {
       session.user = {
         name: token.name as string | undefined,
         email: token.email as string | undefined,
@@ -72,7 +72,7 @@ export const authConfig = {
     },
   },
   events: {
-    async signIn(message) {
+    async signIn(message: any) {
       const { user, account } = message;
       try {
         await appendUserToSheet({
