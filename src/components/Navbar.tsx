@@ -3,11 +3,14 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [demosOpen, setDemosOpen] = useState(false);
   const close = () => setOpen(false);
+  const { data: session } = useSession();
 
   return (
     <div className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-black/10 dark:border-white/10">
@@ -65,6 +68,25 @@ export default function Navbar() {
         </button>
 
         <div className="hidden md:flex items-center gap-3">
+          {session?.user ? (
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-semibold">{session.user.name || session.user.email}</span>
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+              >
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signIn("google", { callbackUrl: "/" })}
+              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+              style={{ fontFamily: 'var(--font-geist-sans)' }}
+            >
+              Sign in with Google
+            </button>
+          )}
           <Link
             href="#contact"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
@@ -102,13 +124,33 @@ export default function Navbar() {
 
             <Link href="#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
             <div className="pt-2">
-              <Link
-                href="#contact"
-                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
-                onClick={close}
-              >
-                Get proposal
-              </Link>
+              {session?.user ? (
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold">{session.user.name || session.user.email}</span>
+                  <button
+                    onClick={() => { close(); signOut({ callbackUrl: "/" }); }}
+                    className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                  >
+                    Sign out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => { close(); signIn("google", { callbackUrl: "/" }); }}
+                  className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                >
+                  Sign in with Google
+                </button>
+              )}
+              <div className="mt-2">
+                <Link
+                  href="#contact"
+                  className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                  onClick={close}
+                >
+                  Get proposal
+                </Link>
+              </div>
             </div>
           </div>
         </div>

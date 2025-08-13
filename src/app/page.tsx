@@ -1,8 +1,8 @@
 import Hero from "@/components/Hero";
-import ServicesSection from "@/components/ServicesSection";
-import USPCarousel from "@/components/USPCarousel";
 import CalendarSection from "@/components/CalendarSection";
+import USPCarousel from "@/components/USPCarousel";
 import Testimonials from "@/components/Testimonials";
+import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 
 export default function Home() {

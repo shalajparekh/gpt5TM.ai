@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { CartProvider } from "@/contexts/CartContext";
+import { AppProviders } from "./providers";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
@@ -34,14 +35,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} ${navFont.variable} antialiased`}>
-        <CartProvider>
-          <Navbar />
-          {children}
-          <WhatsAppButton />
-          <Footer />
-        </CartProvider>
+        <AppProviders>
+          <CartProvider>
+            <Navbar />
+            {children}
+            <WhatsAppButton />
+            <Footer />
+          </CartProvider>
+        </AppProviders>
       </body>
     </html>
   );

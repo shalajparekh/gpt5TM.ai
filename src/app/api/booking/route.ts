@@ -73,11 +73,12 @@ export async function POST(req: Request) {
 
     // Append to Google Sheets with detailed errors
     try {
-      const clientEmail = process.env.GOOGLE_SHEETS_CLIENT_EMAIL?.trim();
-      const rawKey = process.env.GOOGLE_SHEETS_PRIVATE_KEY;
+      const clientEmail = (process.env.GOOGLE_SHEETS_BOOKINGS_CLIENT_EMAIL || process.env.GOOGLE_SHEETS_CLIENT_EMAIL)?.trim();
+      const b64 = process.env.GOOGLE_SHEETS_BOOKINGS_PRIVATE_KEY_BASE64 || process.env.GOOGLE_SHEETS_PRIVATE_KEY_BASE64;
+      const rawKey = b64 ? Buffer.from(b64, "base64").toString("utf-8") : (process.env.GOOGLE_SHEETS_BOOKINGS_PRIVATE_KEY || process.env.GOOGLE_SHEETS_PRIVATE_KEY);
       const privateKey = rawKey?.includes("\\n") ? rawKey.replace(/\\n/g, "\n") : rawKey;
-      const spreadsheetId = process.env.GOOGLE_SHEETS_SPREADSHEET_ID?.trim();
-      const sheetName = (process.env.GOOGLE_SHEETS_SHEET_NAME || "Bookings").trim();
+      const spreadsheetId = (process.env.GOOGLE_SHEETS_BOOKINGS_SPREADSHEET_ID || process.env.GOOGLE_SHEETS_SPREADSHEET_ID)?.trim();
+      const sheetName = (process.env.GOOGLE_SHEETS_BOOKINGS_SHEET_NAME || process.env.GOOGLE_SHEETS_SHEET_NAME || "Bookings").trim();
       if (!clientEmail || !privateKey || !spreadsheetId) {
         return NextResponse.json({ error: "SHEETS_CONFIG_MISSING" }, { status: 500 });
       }
