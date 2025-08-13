@@ -1,5 +1,5 @@
-import type { AuthOptions, SessionStrategy } from "next-auth";
-import Google from "next-auth/providers/google";
+import type { AuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
 
 async function appendUserToSheet(params: {
   name?: string | null;
@@ -40,15 +40,14 @@ async function appendUserToSheet(params: {
   await sheets.spreadsheets.values.append({ spreadsheetId, range: `${title}!A1`, valueInputOption: "RAW", insertDataOption: "INSERT_ROWS", requestBody: { values } });
 }
 
-export const authConfig: AuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
-    Google({
+    GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
-  session: { strategy: "jwt" as SessionStrategy },
-  trustHost: true,
+  session: { strategy: "jwt" },
   pages: {
     signIn: "/", // we invoke signIn() from navbar; fallback to home
   },
