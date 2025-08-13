@@ -1,17 +1,7 @@
 "use client";
 import { useCart } from "@/contexts/CartContext";
 
-const plans = [
-  { key: "web", title: "Websites & Apps", price: 29999 },
-  { key: "ecom", title: "E-commerce", price: 39999 },
-  { key: "whatsapp", title: "WhatsApp Commerce", price: 19999 },
-  { key: "ppc", title: "PPC & SEO", price: 14999 },
-  { key: "email", title: "Email Automation", price: 9999 },
-  { key: "brand", title: "Branding & Design", price: 14999 },
-  { key: "video", title: "Video Scripts", price: 7999 },
-  { key: "addons", title: "Add-ons", price: 4999 },
-  { key: "support", title: "Care Plans", price: 7999 },
-];
+// const plans = [...] // reserved for future use
 
 export default function PricingPage() {
   const { add, items, total } = useCart();

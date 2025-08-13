@@ -1,6 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const testimonials = [
   { name: "Rohan S.", role: "Cafe Owner, Indiranagar", company: "ATLASIAN", text: "TechMaadi launched our site in days. Online orders up 34%.", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&auto=format&fit=crop&w=900&h=900" },
@@ -40,7 +41,7 @@ export default function Testimonials() {
                 className="relative snap-start shrink-0 w-[85%] sm:w-[60%] md:w-[32%] aspect-[3/4] rounded-3xl overflow-hidden shadow-xl"
                 whileHover={{ y: -4 }}
               >
-                <img src={t.img} alt={t.name} className="absolute inset-0 h-full w-full object-cover"/>
+                <Image src={t.img} alt={t.name} fill sizes="(min-width:1024px) 33vw, (min-width:640px) 60vw, 85vw" className="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"/>
                 <div className="absolute inset-x-0 bottom-0 p-5 text-white">
                   <p className="text-sm opacity-90">“{t.text}”</p>

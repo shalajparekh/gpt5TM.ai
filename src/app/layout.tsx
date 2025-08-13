@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CartProvider } from "@/contexts/CartContext";
 import { AppProviders } from "./providers";
 import Navbar from "@/components/Navbar";

@@ -55,18 +55,19 @@ export const authConfig: NextAuthConfig = {
   callbacks: {
     async jwt({ token, account, profile }) {
       if (account && profile) {
-        token.name = profile.name as string | undefined;
-        token.email = profile.email as string | undefined;
-        token.picture = (profile as any).picture as string | undefined;
+        const typedProfile = profile as { name?: string; email?: string; picture?: string };
+        token.name = typedProfile.name;
+        token.email = typedProfile.email;
+        token.picture = typedProfile.picture;
       }
       return token;
     },
     async session({ session, token }) {
       session.user = {
-        name: token.name ?? undefined,
-        email: token.email ?? undefined,
-        image: token.picture ?? undefined,
-      } as any;
+        name: token.name as string | undefined,
+        email: token.email as string | undefined,
+        image: token.picture as string | undefined,
+      } as typeof session.user;
       return session;
     },
   },
