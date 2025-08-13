@@ -1,4 +1,4 @@
-import { type NextAuthConfig } from "next-auth";
+// Note: avoid strict typing here to support multiple NextAuth versions
 import Google from "next-auth/providers/google";
 
 async function appendUserToSheet(params: {
@@ -40,7 +40,7 @@ async function appendUserToSheet(params: {
   await sheets.spreadsheets.values.append({ spreadsheetId, range: `${title}!A1`, valueInputOption: "RAW", insertDataOption: "INSERT_ROWS", requestBody: { values } });
 }
 
-export const authConfig: NextAuthConfig = {
+export const authConfig = {
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,

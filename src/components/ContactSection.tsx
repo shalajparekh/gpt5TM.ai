@@ -5,12 +5,12 @@ import Image from "next/image";
 export default function ContactSection() {
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
-    setError(null);
+    setSubmitError(null);
     setDone(null);
     const form = new FormData(e.currentTarget);
     // merge service checkboxes into message to keep API schema simple
@@ -31,7 +31,7 @@ export default function ContactSection() {
       (e.currentTarget as HTMLFormElement).reset();
     } catch (err) {
       const messageText = err instanceof Error ? err.message : "Failed to submit";
-      setError(messageText);
+      setSubmitError(messageText);
     } finally {
       setLoading(false);
     }
@@ -96,7 +96,9 @@ export default function ContactSection() {
               <label className="block mt-10 text-zinc-400">Tell us about your project</label>
               <textarea name="message" rows={4} required className="w-full bg-transparent border-0 border-b border-zinc-300 focus:outline-none focus:ring-0 focus:border-black text-2xl py-3" />
 
-              <div className="mt-10 flex items-center justify-end">
+              {done && <p className="mt-6 text-green-600">{done}</p>}
+              {submitError && <p className="mt-2 text-red-600">{submitError}</p>}
+              <div className="mt-8 flex items-center justify-end">
                 <button disabled={loading} className="text-zinc-700 hover:text-black inline-flex items-center gap-2">
                   {loading ? "sending…" : "send"} <span>→</span>
                 </button>
