@@ -1,3 +1,4 @@
+import Image from "next/image";
 export const metadata = {
   title: "Salon, Spa & Wellness Demo — TechMaadi.ai",
   description:
@@ -55,7 +56,7 @@ export default function SalonDemoPage() {
               { title: "Haircare", img: "https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=60" },
             ].map((c) => (
               <article key={c.title} className="relative rounded-3xl overflow-hidden shadow-lg">
-                <img src={c.img} alt={c.title} className="h-64 w-full object-cover" loading="eager" />
+                <Image src={c.img} alt={c.title} width={1200} height={512} className="h-64 w-full object-cover" priority />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-0 p-4 text-white text-xl font-semibold">{c.title}</div>
               </article>
@@ -77,11 +78,13 @@ export default function SalonDemoPage() {
             <a href="#book" className="mt-6 inline-flex rounded-full px-5 py-2.5 bg-rose-500 text-white">Book Now</a>
           </div>
           <div className="relative h-72 md:h-96 rounded-3xl overflow-hidden shadow-xl">
-            <img
+            <Image
               src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1400&q=80"
               alt="Spa indulgence"
-              className="absolute inset-0 h-full w-full object-cover"
-              loading="eager"
+              fill
+              sizes="(min-width:768px) 50vw, 100vw"
+              className="object-cover"
+              priority
             />
           </div>
         </div>
@@ -156,10 +159,12 @@ export default function SalonDemoPage() {
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="relative h-40 md:h-52 rounded-xl overflow-hidden">
-                <img
+                <Image
                   src={`https://picsum.photos/seed/salon-${i}/600/400`}
                   alt="Gallery item"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  fill
+                  sizes="(min-width:768px) 25vw, 50vw"
+                  className="object-cover"
                 />
               </div>
             ))}
@@ -175,10 +180,12 @@ export default function SalonDemoPage() {
             {["Mumbai", "Hyderabad", "Kolkata", "Pune"].map((city) => (
               <article key={city} className="rounded-3xl overflow-hidden border border-black/10 bg-white shadow-sm">
                 <div className="relative h-32">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1544717305-996b815c338c?auto=format&fit=crop&w=1200&q=60"
                     alt={city}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    fill
+                    sizes="(min-width:768px) 25vw, 50vw"
+                    className="object-cover"
                   />
                 </div>
                 <div className="p-4 flex items-center justify-between">

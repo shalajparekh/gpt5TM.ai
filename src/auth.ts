@@ -63,11 +63,14 @@ export const authOptions: AuthOptions = {
       return token;
     },
     async session({ session, token }) {
+      type SessionUser = { name?: string | null; email?: string | null; image?: string | null };
       const t = token as { name?: string | null; email?: string | null; picture?: string | null };
-      if (!session.user) session.user = {} as typeof session.user;
-      session.user.name = t.name ?? session.user.name;
-      session.user.email = t.email ?? session.user.email;
-      session.user.image = t.picture ?? (session.user.image as string | undefined);
+      const current: SessionUser = (session.user || {}) as SessionUser;
+      (session as { user?: SessionUser }).user = {
+        name: t.name ?? current.name ?? undefined,
+        email: t.email ?? current.email ?? undefined,
+        image: t.picture ?? current.image ?? undefined,
+      };
       return session;
     },
   },
