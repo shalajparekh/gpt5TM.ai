@@ -53,26 +53,24 @@ export const authConfig: AuthOptions = {
     signIn: "/", // we invoke signIn() from navbar; fallback to home
   },
   callbacks: {
-    async jwt({ token, account, profile }: any) {
+    async jwt({ token, account, profile }: { token: { [key: string]: unknown; name?: string; email?: string; picture?: string }; account?: { provider?: string; providerAccountId?: string | null }; profile?: { name?: string; email?: string; picture?: string } }) {
       if (account && profile) {
-        const typedProfile = profile as { name?: string; email?: string; picture?: string };
-        token.name = typedProfile.name;
-        token.email = typedProfile.email;
-        token.picture = typedProfile.picture;
+        token.name = profile.name;
+        token.email = profile.email;
+        (token as { picture?: string }).picture = profile.picture;
       }
       return token;
     },
-    async session({ session, token }: any) {
-      session.user = {
-        name: token.name as string | undefined,
-        email: token.email as string | undefined,
-        image: token.picture as string | undefined,
-      } as typeof session.user;
+    async session({ session, token }: { session: { user?: { name?: string; email?: string; image?: string } }; token: { [key: string]: unknown; name?: string; email?: string; picture?: string } }) {
+      session.user = session.user || {};
+      session.user.name = token.name;
+      session.user.email = token.email;
+      session.user.image = token.picture as string | undefined;
       return session;
     },
   },
   events: {
-    async signIn(message: any) {
+    async signIn(message: { user?: { name?: string; email?: string; image?: string }; account?: { provider?: string; providerAccountId?: string | null } }) {
       const { user, account } = message;
       try {
         await appendUserToSheet({
