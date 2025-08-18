@@ -1,7 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
 const heroCards = [
   { title: "Better Cashflow", desc: "Streamlined accounting systems for faster decisions." },
@@ -305,7 +306,7 @@ export default function LawCADemoClient() {
         <div className="mx-auto max-w-7xl px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
           <div className="font-semibold">Alway & Associates Chartered Accountants</div>
           <nav className="text-sm flex flex-wrap gap-x-6 gap-y-2">
-            <a href="/" className="hover:underline">Home</a>
+            <Link href="/" className="hover:underline">Home</Link>
             <a href="#services" className="hover:underline">Services</a>
             <a href="#" className="hover:underline">Blogs</a>
             <a href="#" className="hover:underline">Testimonials</a>
