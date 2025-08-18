@@ -71,7 +71,16 @@ export default function CalendarSection() {
   }
 
   return (
-    <section id="calendar" className="w-full py-24">
+    <section id="calendar" className="relative w-full py-24">
+      {/* Soothing, subtle background for this section */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-black" />
+        {/* Corner glows */}
+        <div className="absolute -top-16 -left-16 h-[320px] w-[320px] rounded-full bg-blue-200/25 dark:bg-blue-900/20 blur-3xl" />
+        <div className="absolute -top-16 -right-16 h-[320px] w-[320px] rounded-full bg-cyan-200/25 dark:bg-cyan-900/20 blur-3xl" />
+        <div className="absolute -bottom-16 -left-16 h-[320px] w-[320px] rounded-full bg-indigo-200/25 dark:bg-indigo-900/20 blur-3xl" />
+        <div className="absolute -bottom-16 -right-16 h-[320px] w-[320px] rounded-full bg-fuchsia-200/25 dark:bg-fuchsia-900/20 blur-3xl" />
+      </div>
       <div className="mx-auto max-w-7xl px-4">
         <div className="rounded-[28px] overflow-hidden border border-black/20 dark:border-white/20 bg-white dark:bg-zinc-900 shadow-[0_40px_120px_rgba(0,0,0,0.35),0_20px_60px_rgba(0,0,0,0.25),0_8px_24px_rgba(0,0,0,0.18)]">
           <div className="grid md:grid-cols-2 text-black dark:text-zinc-100">

@@ -5,6 +5,43 @@ export const metadata = {
     "A static demo landing page for Salons, Spas and Wellness Centers inspired by leading Indian salon sites.",
 };
 
+// Maps config — use Google Static Maps if a key is available; otherwise fall back to OpenStreetMap static.
+const GOOGLE_MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+const CITY_COORDS: Record<string, { lat: number; lng: number }> = {
+  Mumbai: { lat: 19.076, lng: 72.8777 },
+  Hyderabad: { lat: 17.385, lng: 78.4867 },
+  Kolkata: { lat: 22.5726, lng: 88.3639 },
+  Pune: { lat: 18.5204, lng: 73.8567 },
+};
+
+function getGoogleStaticMapUrl(city: string): string | null {
+  if (!GOOGLE_MAPS_KEY) return null;
+  const coords = CITY_COORDS[city];
+  const center = coords ? `${coords.lat},${coords.lng}` : encodeURIComponent(city);
+  // Use 640x320 with scale=2 to stay within free tier limits while rendering crisp images.
+  const params = new URLSearchParams({
+    center,
+    zoom: "11",
+    size: "640x320",
+    scale: "2",
+    maptype: "roadmap",
+    markers: `color:red|${center}`,
+    key: GOOGLE_MAPS_KEY,
+  });
+  return `https://maps.googleapis.com/maps/api/staticmap?${params.toString()}`;
+}
+
+function getOsmStaticMapUrl(city: string): string {
+  const coords = CITY_COORDS[city];
+  const center = coords ? `${coords.lat},${coords.lng}` : encodeURIComponent(city);
+  const params = new URLSearchParams({ center, zoom: "11", size: "640x320", markers: `${center},red` });
+  return `https://staticmap.openstreetmap.de/staticmap.php?${params.toString()}`;
+}
+
+function getMapUrl(city: string): string {
+  return getGoogleStaticMapUrl(city) || getOsmStaticMapUrl(city);
+}
+
 export default function SalonDemoPage() {
   return (
     <div className="min-h-screen">
@@ -157,11 +194,20 @@ export default function SalonDemoPage() {
         <div className="mx-auto max-w-7xl px-4">
           <h3 className="text-3xl font-bold tracking-tight">Our Gallery</h3>
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Array.from({ length: 8 }).map((_, i) => (
+            {[
+              { src: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1200&q=80", alt: "Spa towels and flowers" },
+              { src: "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1200&q=80", alt: "Stylist blow drying hair" },
+              { src: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1200&q=80", alt: "Nail art manicure" },
+              { src: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=1200&q=80", alt: "Professional makeup tools" },
+              { src: "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1200&q=80", alt: "Salon interior with chair" },
+              { src: "https://images.unsplash.com/photo-1505577058444-a3dab90d4253?auto=format&fit=crop&w=1200&q=80", alt: "Hair coloring palette" },
+              { src: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80", alt: "Spa stones and candle" },
+              { src: "https://images.unsplash.com/photo-1505576399279-565b52d4ac71?auto=format&fit=crop&w=1200&q=80", alt: "Skincare treatment" },
+            ].map((item, i) => (
               <div key={i} className="relative h-40 md:h-52 rounded-xl overflow-hidden">
                 <Image
-                  src={`https://picsum.photos/seed/salon-${i}/600/400`}
-                  alt="Gallery item"
+                  src={item.src}
+                  alt={item.alt}
                   fill
                   sizes="(min-width:768px) 25vw, 50vw"
                   className="object-cover"
@@ -176,17 +222,11 @@ export default function SalonDemoPage() {
       <section className="w-full py-16 bg-zinc-50" id="locations">
         <div className="mx-auto max-w-7xl px-4">
           <h3 className="text-3xl font-bold tracking-tight">Our Locations</h3>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-2 gap-8">
             {["Mumbai", "Hyderabad", "Kolkata", "Pune"].map((city) => (
               <article key={city} className="rounded-3xl overflow-hidden border border-black/10 bg-white shadow-sm">
                 <div className="relative h-32">
-                  <Image
-                    src="https://images.unsplash.com/photo-1544717305-996b815c338c?auto=format&fit=crop&w=1200&q=60"
-                    alt={city}
-                    fill
-                    sizes="(min-width:768px) 25vw, 50vw"
-                    className="object-cover"
-                  />
+                  <img src={getMapUrl(city)} alt={city} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
                 </div>
                 <div className="p-4 flex items-center justify-between">
                   <div className="font-medium">{city}</div>
