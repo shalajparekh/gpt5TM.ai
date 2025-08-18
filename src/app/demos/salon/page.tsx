@@ -222,15 +222,16 @@ export default function SalonDemoPage() {
       <section className="w-full py-16 bg-zinc-50" id="locations">
         <div className="mx-auto max-w-7xl px-4">
           <h3 className="text-3xl font-bold tracking-tight">Our Locations</h3>
-          <div className="mt-8 grid grid-cols-2 md:grid-cols-2 gap-8">
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-y-10 gap-x-5">
             {["Mumbai", "Hyderabad", "Kolkata", "Pune"].map((city) => (
-              <article key={city} className="rounded-3xl overflow-hidden border border-black/10 bg-white shadow-sm">
-                <div className="relative h-32">
+              <article key={city} className="group relative rounded-3xl overflow-hidden border border-black/10 bg-white shadow-lg hover:shadow-2xl transition-shadow w-[70%] mx-auto">
+                <div className="relative aspect-square">
                   <img src={getMapUrl(city)} alt={city} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
-                </div>
-                <div className="p-4 flex items-center justify-between">
-                  <div className="font-medium">{city}</div>
-                  <a href="#book" className="text-sm underline">Book Now</a>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between text-white">
+                    <div className="font-medium">{city}</div>
+                    <a href="#book" className="text-sm underline">Book Now</a>
+                  </div>
                 </div>
               </article>
             ))}

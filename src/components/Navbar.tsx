@@ -48,6 +48,9 @@ export default function Navbar() {
                   <Link href="/demos/fashion" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Fashion Boutiques Demo</Link>
                 </li>
                 <li>
+                  <Link href="/demos/law-ca" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Law and CA Firms Demo</Link>
+                </li>
+                <li>
                   <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Industry Apps</Link>
                 </li>
               </ul>
@@ -122,6 +125,7 @@ export default function Navbar() {
                 <Link href="/demos/salon" className="block py-2" onClick={close}>Salons, Spa, Wellness Center Demo</Link>
                 <Link href="/demos/cafe" className="block py-2" onClick={close}>Cafés / Cloud Kitchens Demo</Link>
                 <Link href="/demos/fashion" className="block py-2" onClick={close}>Fashion Boutiques Demo</Link>
+                <Link href="/demos/law-ca" className="block py-2" onClick={close}>Law and CA Firms Demo</Link>
                 <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Industry Apps</Link>
               </div>
             )}
