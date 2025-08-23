@@ -14,8 +14,8 @@ export default function ContactSection() {
     setSubmitError(null);
     setDone(null);
     const form = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(form.entries());
-    (payload as any)["message"] = `Services interested: ${service || "-"}`;
+    const payload = Object.fromEntries(form.entries()) as Record<string, string>;
+    payload["message"] = `Services interested: ${service || "-"}`;
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
