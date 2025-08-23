@@ -24,7 +24,7 @@ export async function POST(req: Request) {
 
     const client = twilio(accountSid, authToken);
     const businessBody = `New booking confirmed:\nName: ${booking.name}\nPhone: ${booking.phone || "-"}\nEmail: ${booking.email || "-"}\nStart: ${booking.startTime.toLocaleString()}\nEnd: ${booking.endTime.toLocaleString()}\nNotes: ${booking.notes || "-"}`;
-    const userBody = `Hi ${booking.name}, your booking is confirmed!\nStart: ${booking.startTime.toLocaleString()}\nEnd: ${booking.endTime.toLocaleString()}\n— TechMaadi`;
+    const userBody = `Hi ${booking.name}, your booking is confirmed!\nStart: ${booking.startTime.toLocaleString()}\nEnd: ${booking.endTime.toLocaleString()}\n— Nesh Tech Inc.`;
 
     const toBusiness = businessWhatsapp.startsWith("whatsapp:") ? businessWhatsapp : `whatsapp:${businessWhatsapp}`;
     await client.messages.create({ from, to: toBusiness, body: businessBody });

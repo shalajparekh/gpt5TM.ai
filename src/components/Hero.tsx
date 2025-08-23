@@ -7,7 +7,7 @@ export default function Hero() {
         <div className="relative overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 shadow-2xl md:shadow-[0_40px_120px_rgba(0,0,0,0.35)]">
           <div className="grid grid-cols-1 lg:grid-cols-12">
             {/* Left: promo panel with diagonal edge */}
-            <div className="relative lg:col-span-7 bg-[#0a5bd3] text-white p-10 md:p-14 min-h-[520px] md:min-h-[640px] flex flex-col justify-center">
+            <div className="relative lg:col-span-6 bg-[#0a5bd3] text-white p-10 md:p-14 min-h-[520px] md:min-h-[640px] flex flex-col justify-center">
               <div
                 className="hidden lg:block absolute inset-y-0 right-[-120px] w-[240px] bg-[#0a5bd3]"
                 style={{ clipPath: "polygon(0 0, 100% 30%, 100% 70%, 0 100%)" }}
@@ -15,9 +15,9 @@ export default function Hero() {
               />
               <p className="text-xs md:text-sm tracking-[0.25em] opacity-90">BANGALORE‑BUILT • AI‑POWERED • SMALL BUSINESS READY</p>
               <h1 className="mt-4 text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-tight">
-                <span className="block leading-tight">Launch fast.</span>
-                <span className="block mt-2 md:mt-3 leading-tight">Sell more.</span>
-                <span className="block mt-2 md:mt-3 leading-tight">Automate growth.</span>
+                <span className="block leading-tight">Launch Fast.</span>
+                <span className="block mt-2 md:mt-3 leading-tight">Boost Sales.</span>
+                <span className="block mt-2 md:mt-3 leading-tight">Grow Smart.</span>
               </h1>
               <p className="mt-6 max-w-xl text-white/90 font-medium text-base md:text-lg leading-snug">
                 End‑to‑end websites & apps, e‑commerce, and WhatsApp commerce — one partner, clear pricing, rapid turnaround.
@@ -33,7 +33,7 @@ export default function Hero() {
             </div>
 
             {/* Right: visual panel */}
-            <div className="relative lg:col-span-5 min-h-[520px] md:min-h-[640px]">
+            <div className="relative lg:col-span-6 min-h-[520px] md:min-h-[640px]">
               <video
                 src="/techmaadi.mp4"
                 className="absolute inset-0 h-full w-full object-cover"

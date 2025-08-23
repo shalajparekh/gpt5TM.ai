@@ -15,10 +15,10 @@ export default function Navbar() {
   return (
     <div className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-black/10 dark:border-white/10">
       <div className="mx-auto max-w-7xl px-4 h-20 flex items-center justify-between">
-        <Link href="/" className="tracking-tight" aria-label="TechMaadi.ai home" style={{ fontFamily: 'var(--font-geist-sans)' }}>
+        <Link href="/" className="tracking-tight" aria-label="Nesh Tech Inc. home" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <span className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-extrabold text-lg md:text-xl">
-            <Image src="/tm.png" alt="TechMaadi.ai" width={28} height={28} className="h-7 w-auto" priority />
-            TechMaadi.ai
+            <Image src="/logo1.png" alt="Nesh Tech Inc." width={40} height={40} className="h-9 md:h-10 w-auto" priority />
+            Nesh Tech Inc.
           </span>
         </Link>
         {/* Desktop nav */}
@@ -46,12 +46,6 @@ export default function Navbar() {
                 </li>
                 <li>
                   <Link href="/demos/fashion" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Fashion Boutiques Demo</Link>
-                </li>
-                <li>
-                  <Link href="/demos/law-ca" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Law and CA Firms Demo</Link>
-                </li>
-                <li>
-                  <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Industry Apps</Link>
                 </li>
               </ul>
             </div>
@@ -125,23 +119,18 @@ export default function Navbar() {
                 <Link href="/demos/salon" className="block py-2" onClick={close}>Salons, Spa, Wellness Center Demo</Link>
                 <Link href="/demos/cafe" className="block py-2" onClick={close}>Cafés / Cloud Kitchens Demo</Link>
                 <Link href="/demos/fashion" className="block py-2" onClick={close}>Fashion Boutiques Demo</Link>
-                <Link href="/demos/law-ca" className="block py-2" onClick={close}>Law and CA Firms Demo</Link>
-                <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Industry Apps</Link>
               </div>
             )}
 
             <Link href="#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
             <div className="pt-2">
               {session?.user ? (
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-semibold">{session.user.name || session.user.email}</span>
-                  <button
-                    onClick={() => { close(); signOut({ callbackUrl: "/" }); }}
-                    className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
-                  >
-                    Sign out
-                  </button>
-                </div>
+                <button
+                  onClick={() => { close(); signOut({ callbackUrl: "/" }); }}
+                  className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                >
+                  Sign out
+                </button>
               ) : (
                 <button
                   onClick={() => { close(); signIn("google", { callbackUrl: "/" }); }}

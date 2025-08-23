@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const testimonials = [
-  { name: "Rohan S.", role: "Cafe Owner, Indiranagar", company: "ATLASIAN", text: "TechMaadi launched our site in days. Online orders up 34%.", img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&auto=format&fit=crop&w=900&h=900" },
-  { name: "Priya K.", role: "Boutique, Koramangala", company: "ATLASIAN", text: "WhatsApp catalog + UPI payments made sales effortless.", img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&auto=format&fit=crop&w=900&h=900" },
-  { name: "Arjun M.", role: "Fitness Studio, HSR", company: "ATLASIAN", text: "Ads + SEO brought steady leads. Clear weekly reports.", img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&auto=format&fit=crop&w=900&h=900" },
-  { name: "Neha T.", role: "Bakery, Jayanagar", company: "ATLASIAN", text: "Cart recovery emails recovered 18% revenue.", img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&auto=format&fit=crop&w=900&h=900" },
-  { name: "Vijay R.", role: "Electronics, Rajajinagar", company: "ATLASIAN", text: "Inventory sync across website and WhatsApp store is seamless.", img: "https://images.unsplash.com/photo-1554151228-14d9def656e4?q=80&auto=format&fit=crop&w=900&h=900" },
-  { name: "Ananya D.", role: "Salon, Whitefield", company: "ATLASIAN", text: "Booking automation saved us hours weekly.", img: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&auto=format&fit=crop&w=900&h=900" },
+  { name: "Nehal P.", role: "Cafe Owner, Indiranagar", company: "4th Wave Coffee", text: "Nesh Tech launched our website in just a few days. Online orders are already up by 34%! Their support is outstanding, led personally by the owner. We highly recommend them to any business going online.", img: "/images/1.png" },
+  { name: "Sharvil M.", role: "Boutique, Koramangala", company: "The Homegrown", text: "Setting up a WhatsApp catalog with UPI payments made our sales process seamless and hassle-free. Customers love the simplicity.WhatsApp catalog + UPI payments made sales effortless.", img: "/images/2.png" },
+  { name: "Nirosha R.", role: "Fitness Studio, HSR", company: "Goldy's Gym", text: "Neshtech Ads and SEO campaigns delivered consistent leads, and the clear weekly reports kept us confident in the results.", img: "/images/3.png" },
+  { name: "Ravindra R.", role: "Bakery, Jayanagar", company: "Saloni's Bakery", text: "Cart recovery emails helped us recover 18% of lost revenue. NeshTech made the entire process seamless and automated.", img: "/images/4.png" },
+  { name: "Aashu P.", role: "Electronics, Rajajinagar", company: "Parekh Sales", text: "Inventory sync across our website and WhatsApp store is seamless, thanks to NeshTech. Managing stock is finally stress-free, and customers always see the right availability.", img: "/images/5.png" },
+  { name: "Royal Gujarat.", role: "Salon, Whitefield", company: "Honey Combs", text: "Booking automation by NeshTech saved us hours every week. Their smart workflows keep our team focused on serving customers, not manual tasks.", img: "/images/6.png" },
 ];
 
 export default function Testimonials() {
@@ -25,10 +25,10 @@ export default function Testimonials() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <div>
             <p className="text-sm text-zinc-500">Testimonials</p>
-            <h2 className="mt-2 text-3xl md:text-5xl font-extrabold tracking-tight">Trusted by over 15k+<br/>Satisfied Clients</h2>
+            <h2 className="mt-2 text-3xl md:text-5xl font-extrabold tracking-tight">Trusted by over 150+<br/>Satisfied Clients</h2>
           </div>
           <div className="md:text-right">
-            <p className="text-zinc-600 dark:text-zinc-300 max-w-md">TechMaadi.ai helps Indian businesses grow sales with AI‑powered websites, WhatsApp commerce and performance marketing.</p>
+            <p className="text-zinc-600 dark:text-zinc-300 max-w-md">Nesh Tech Inc. helps Indian businesses grow sales with AI‑powered websites, WhatsApp commerce and SEO.</p>
             <a href="#contact" className="mt-3 inline-flex items-center rounded-full px-5 py-2.5 bg-purple-600 text-white font-medium">Get Started Now</a>
           </div>
         </div>

@@ -43,7 +43,7 @@ const items: USP[] = [
 ];
 
 export default function USPCarousel({
-  title = "Why TechMaadi?",
+  title = "Why Nesh Tech?",
   subtitle = "Bangalore‑built. AI‑powered. Small Business Ready.",
 }: {
   title?: string;

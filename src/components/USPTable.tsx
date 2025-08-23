@@ -24,7 +24,7 @@ const usps: USP[] = [
 ];
 
 export default function USPTable({
-  title = "Why TechMaadi?",
+  title = "Why Nesh Tech?",
   subtitle = "Bangalore-built. AI-powered. SMB-ready.",
 }: {
   title?: string;

@@ -23,7 +23,7 @@ const navFont = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "TechMaadi — Build. Sell. Automate. Grow.",
+  title: "Nesh Tech Inc. — Build. Sell. Automate. Grow.",
   description:
     "Bangalore-built, AI-powered web, e-commerce, WhatsApp, and performance marketing for Indian SMBs. Launch fast, sell more, and automate growth.",
 };

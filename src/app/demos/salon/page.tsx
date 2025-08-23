@@ -1,6 +1,6 @@
 import Image from "next/image";
 export const metadata = {
-  title: "Salon, Spa & Wellness Demo — TechMaadi.ai",
+  title: "Salon, Spa & Wellness Demo — Nesh Tech Inc.",
   description:
     "A static demo landing page for Salons, Spas and Wellness Centers inspired by leading Indian salon sites.",
 };

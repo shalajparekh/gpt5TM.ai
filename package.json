@@ -14,10 +14,10 @@
     "date-fns": "^3.6.0",
     "framer-motion": "^12.23.12",
     "googleapis": "^134.0.0",
-    "next-auth": "^5.0.0",
     "mongoose": "^8.17.1",
     "next": "15.4.6",
     "next-auth": "^4.24.11",
+    "nodemailer": "^6.10.1",
     "razorpay": "^2.9.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -26,13 +26,21 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "playwright": "^1.54.2",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

@@ -2,56 +2,45 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="mt-16">
-      <div className="mx-auto max-w-7xl px-4 py-12 rounded-3xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900">
+    <footer className="w-full bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-950 dark:to-black border-t border-black/10 dark:border-white/10">
+      <div className="mx-auto max-w-7xl px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div>
-            <div className="text-xl font-bold">TechMaadi.ai</div>
-            <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 max-w-sm">
-              We help small businesses launch faster, sell more, and automate growth with AI‑powered web, e‑commerce, and WhatsApp solutions.
-            </p>
-            <div className="mt-4 flex items-center gap-3 text-zinc-600">
-              <a href="#" aria-label="X" className="h-9 w-9 rounded-xl border border-black/10 flex items-center justify-center">𝕏</a>
-              <a href="#" aria-label="Instagram" className="h-9 w-9 rounded-xl border border-black/10 flex items-center justify-center">◎</a>
-              <a href="#" aria-label="LinkedIn" className="h-9 w-9 rounded-xl border border-black/10 flex items-center justify-center">in</a>
-              <a href="#" aria-label="GitHub" className="h-9 w-9 rounded-xl border border-black/10 flex items-center justify-center">◎</a>
+          <div className="md:col-span-2">
+            <div className="text-2xl font-extrabold tracking-tight">Nesh Tech Inc.</div>
+            <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 max-w-md">Bangalore‑built, AI‑powered solutions for Indian SMBs. Websites, e‑commerce, WhatsApp commerce and performance marketing.</p>
+            <div className="mt-4 flex items-center gap-3">
+              <a href="#" aria-label="Twitter" className="h-10 w-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800">𝕏</a>
+              <a href="#" aria-label="LinkedIn" className="h-10 w-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800">in</a>
+              <a href="#" aria-label="Instagram" className="h-10 w-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800">◎</a>
+              <a href="#" aria-label="YouTube" className="h-10 w-10 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center hover:bg-zinc-100 dark:hover:bg-zinc-800">▶</a>
             </div>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Product</h4>
-            <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <li><Link href="#services">Features</Link></li>
-              <li><Link href="/pricing">Pricing</Link></li>
-              <li><Link href="#services">Integrations</Link></li>
-              <li><Link href="#why">Changelog</Link></li>
+            <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Company</div>
+            <ul className="mt-3 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <li><a href="#services" className="hover:underline">Services</a></li>
+              <li><a href="#why" className="hover:underline">Why Nesh Tech</a></li>
+              <li><a href="#testimonials" className="hover:underline">Testimonials</a></li>
+              <li><a href="/pricing" className="hover:underline">Pricing</a></li>
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold mb-2">Resources</h4>
-            <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <li><a href="#">Documentation</a></li>
-              <li><a href="#">Tutorials</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Support</a></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-2">Company</h4>
-            <ul className="space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <li><a href="#">About</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><Link href="#contact">Contact</Link></li>
-              <li><a href="#">Partners</a></li>
+            <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Contact</div>
+            <ul className="mt-3 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">sales@neshtech.co.in</a></li>
+              <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">hello@neshtech.co.in</a></li>
+              <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">support@neshtech.co.in</a></li>
+              <li><a href="tel:+917760841075" className="hover:underline">+91 77608 41075</a></li>
+              <li><span>Nesh Tech Inc, DLF New Town, Akshayanagar, Bangalore</span></li>
             </ul>
           </div>
         </div>
-        <hr className="my-6 border-black/10 dark:border-white/10" />
-        <div className="flex flex-col md:flex-row items-center justify-between text-xs text-zinc-600 dark:text-zinc-400 gap-3">
-          <p>© {new Date().getFullYear()} TechMaadi.ai. All rights reserved.</p>
-          <div className="flex gap-4">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookies Settings</a>
+        <div className="mt-10 flex items-center justify-between text-xs text-zinc-600 dark:text-zinc-400">
+          <p>© {new Date().getFullYear()} Nesh Tech Inc.. All rights reserved.</p>
+          <div className="flex items-center gap-3">
+            <a href="#" className="hover:underline">Privacy</a>
+            <a href="#" className="hover:underline">Terms</a>
+            <a href="#" className="hover:underline">Cookies</a>
           </div>
         </div>
       </div>
