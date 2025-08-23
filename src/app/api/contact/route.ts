@@ -1,8 +1,7 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 export const runtime = "nodejs";
-import { connectToDatabase } from "@/utils/db";
-import { ContactModel } from "@/models/Contact";
+// DB persist is optional; imported dynamically below if available
 
 export async function POST(req: Request) {
   try {

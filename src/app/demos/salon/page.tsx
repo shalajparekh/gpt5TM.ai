@@ -163,7 +163,7 @@ export default function SalonDemoPage() {
                 className="group relative overflow-hidden rounded-3xl border border-black/10 bg-white shadow-sm transition hover:shadow-2xl hover:-translate-y-1"
               >
                 <div className="relative h-32">
-                  <img src={s.img} alt={s.title} className="absolute inset-0 h-full w-full object-cover" />
+                  <Image src={s.img} alt={s.title} fill sizes="(min-width:768px) 25vw, 50vw" className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                 </div>
                 <div className="p-6">
@@ -226,7 +226,7 @@ export default function SalonDemoPage() {
             {["Mumbai", "Hyderabad", "Kolkata", "Pune"].map((city) => (
               <article key={city} className="group relative rounded-3xl overflow-hidden border border-black/10 bg-white shadow-lg hover:shadow-2xl transition-shadow w-[70%] mx-auto">
                 <div className="relative aspect-square">
-                  <img src={getMapUrl(city)} alt={city} className="absolute inset-0 h-full w-full object-cover" loading="lazy" />
+                  <Image src={getMapUrl(city)} alt={city} fill sizes="(min-width:768px) 50vw, 70vw" className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 flex items-center justify-between text-white">
                     <div className="font-medium">{city}</div>
