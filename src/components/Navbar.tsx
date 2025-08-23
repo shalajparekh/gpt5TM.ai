@@ -24,10 +24,10 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-6 text-sm" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <motion.div whileHover={{ y: -2 }}>
-            <Link href="#services" className="hover:opacity-80 font-semibold">Services</Link>
+            <Link href="/#services" className="hover:opacity-80 font-semibold">Services</Link>
           </motion.div>
           <motion.div whileHover={{ y: -2 }}>
-            <Link href="#testimonials" className="hover:opacity-80 font-semibold">Testimonials</Link>
+            <Link href="/#testimonials" className="hover:opacity-80 font-semibold">Testimonials</Link>
           </motion.div>
           <motion.div whileHover={{ y: -2 }}>
             <Link href="/pricing" className="hover:opacity-80 font-semibold">Pricing</Link>
@@ -60,7 +60,7 @@ export default function Navbar() {
             </div>
           </div>
           <motion.div whileHover={{ y: -2 }}>
-            <Link href="#contact" className="hover:opacity-80 font-semibold">Contact</Link>
+            <Link href="/#contact" className="hover:opacity-80 font-semibold">Contact</Link>
           </motion.div>
         </nav>
         {/* Mobile hamburger */}
@@ -97,7 +97,7 @@ export default function Navbar() {
             </button>
           )}
           <Link
-            href="#contact"
+            href="/#contact"
             className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
             style={{ fontFamily: 'var(--font-geist-sans)' }}
           >
@@ -110,8 +110,8 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t border-black/10 dark:border-white/10 bg-white/95 dark:bg-black/60 backdrop-blur">
           <div className="mx-auto max-w-7xl px-4 py-4 space-y-2" style={{ fontFamily: 'var(--font-geist-sans)' }}>
-            <Link href="#services" className="block py-2 font-semibold" onClick={close}>Services</Link>
-            <Link href="#testimonials" className="block py-2 font-semibold" onClick={close}>Testimonials</Link>
+            <Link href="/#services" className="block py-2 font-semibold" onClick={close}>Services</Link>
+            <Link href="/#testimonials" className="block py-2 font-semibold" onClick={close}>Testimonials</Link>
             <Link href="/pricing" className="block py-2 font-semibold" onClick={close}>Pricing</Link>
 
             {/* App Demos collapsible */}
@@ -134,7 +134,7 @@ export default function Navbar() {
               </div>
             )}
 
-            <Link href="#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
+            <Link href="/#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
             <div className="pt-2">
               {session?.user ? (
                 <button
@@ -153,7 +153,7 @@ export default function Navbar() {
               )}
               <div className="mt-2">
                 <Link
-                  href="#contact"
+                  href="/#contact"
                   className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
                   onClick={close}
                 >
