@@ -42,10 +42,19 @@ export default function Navbar() {
                   <Link href="/demos/salon" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Salons, Spa, Wellness Center Demo</Link>
                 </li>
                 <li>
-                  <Link href="/demos/cafe" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Cafés / Cloud Kitchens Demo</Link>
+                  <Link href="/demos/law-ca" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Law & CA Firm Demo</Link>
                 </li>
                 <li>
-                  <Link href="/demos/fashion" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Fashion Boutiques Demo</Link>
+                  <Link href="https://shalaj-inc-e88k.vercel.app/samples" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Restaurant App Demo ↗</Link>
+                </li>
+                <li>
+                  <Link href="https://shalaj-inc-e88k.vercel.app/carpenter" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Carpenter Shop App Demo ↗</Link>
+                </li>
+                <li>
+                  <Link href="https://shalaj-inc-e88k.vercel.app/salon" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Salon App Demo ↗</Link>
+                </li>
+                <li>
+                  <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block rounded-xl px-3 py-2 hover:bg-zinc-50 dark:hover:bg-zinc-800">Industry Apps Demo ↗</Link>
                 </li>
               </ul>
             </div>
@@ -117,8 +126,11 @@ export default function Navbar() {
             {demosOpen && (
               <div className="pl-3 space-y-2">
                 <Link href="/demos/salon" className="block py-2" onClick={close}>Salons, Spa, Wellness Center Demo</Link>
-                <Link href="/demos/cafe" className="block py-2" onClick={close}>Cafés / Cloud Kitchens Demo</Link>
-                <Link href="/demos/fashion" className="block py-2" onClick={close}>Fashion Boutiques Demo</Link>
+                <Link href="/demos/law-ca" className="block py-2" onClick={close}>Law & CA Firm Demo</Link>
+                <Link href="https://shalaj-inc-e88k.vercel.app/samples" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Restaurant App Demo ↗</Link>
+                <Link href="https://shalaj-inc-e88k.vercel.app/carpenter" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Restaurant Carpenter Demo ↗</Link>
+                <Link href="https://shalaj-inc-e88k.vercel.app/salon" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Salon App Demo ↗</Link>
+                <Link href="https://shalaj-inc-e88k.vercel.app/" target="_blank" rel="noopener noreferrer" className="block py-2" onClick={close}>Industry Apps Demo ↗</Link>
               </div>
             )}
 
