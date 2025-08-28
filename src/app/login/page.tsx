@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase/client";
 
 export default function LoginPage() {
-  const router = useRouter();
 
   async function handleGoogle() {
     if (!supabase) return alert("Supabase not configured");
