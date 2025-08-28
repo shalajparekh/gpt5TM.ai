@@ -3,14 +3,44 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
-import { signIn, signOut } from "next-auth/react";
+import { useEffect } from "react";
+import type { AuthChangeEvent, Session } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase/client";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [demosOpen, setDemosOpen] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [hoverLogout, setHoverLogout] = useState(false);
   const close = () => setOpen(false);
-  const { data: session } = useSession();
+
+  useEffect(() => {
+    let unsub: (() => void) | undefined;
+    (async () => {
+      if (!supabase) return;
+      const { data } = await supabase.auth.getSession();
+      const currentUser = data?.session?.user || null;
+      setLoggedIn(Boolean(currentUser));
+      setUserEmail(currentUser?.email ?? null);
+      setUserName((currentUser?.user_metadata as { name?: string } | undefined)?.name ?? null);
+      if (currentUser?.email) {
+        fetch("/api/auth/login-log", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: currentUser.user_metadata?.name || null, email: currentUser.email, loginAt: new Date().toISOString() }),
+        }).catch(() => {});
+      }
+      const sub = supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session: Session | null) => {
+        setLoggedIn(Boolean(session?.user));
+        setUserEmail(session?.user?.email ?? null);
+        setUserName((session?.user?.user_metadata as { name?: string } | undefined)?.name ?? null);
+      });
+      unsub = () => sub.data.subscription.unsubscribe();
+    })();
+    return () => { try { unsub && unsub(); } catch { /* noop */ } };
+  }, []);
 
   return (
     <div className="sticky top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:supports-[backdrop-filter]:bg-black/40 border-b border-black/10 dark:border-white/10">
@@ -18,7 +48,7 @@ export default function Navbar() {
         <Link href="/" className="tracking-tight" aria-label="Nesh Tech Inc. home" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <span className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-extrabold text-lg md:text-xl">
             <Image src="/logo1.png" alt="Nesh Tech Inc." width={40} height={40} className="h-9 md:h-10 w-auto" priority />
-            Nesh Tech Inc.
+            NeshTech Inc.
           </span>
         </Link>
         {/* Desktop nav */}
@@ -77,24 +107,41 @@ export default function Navbar() {
         </button>
 
         <div className="hidden md:flex items-center gap-3">
-          {session?.user ? (
-            <div className="flex items-center gap-3">
-              <span className="text-sm font-semibold">{session.user.name || session.user.email}</span>
-              <button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
-              >
-                Sign out
-              </button>
-            </div>
-          ) : (
+          {loggedIn ? (
             <button
-              onClick={() => signIn("google", { callbackUrl: "/" })}
-              className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+              onClick={async () => {
+                if (supabase) {
+                  const email = userEmail;
+                  const name = userName || null;
+                  if (email) {
+                    fetch("/api/auth/logout-log", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({ name, email, logoutAt: new Date().toISOString() }),
+                    }).catch(() => {});
+                  }
+                  await supabase.auth.signOut();
+                }
+              }}
+              onMouseEnter={() => setHoverLogout(true)}
+              onMouseLeave={() => setHoverLogout(false)}
+              className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] active:scale-95"
               style={{ fontFamily: 'var(--font-geist-sans)' }}
             >
-              Sign in with Google
+              <span className="inline-block min-w-[10ch] text-center">
+                {hoverLogout ? "Logout" : (userName || "Logout")}
+              </span>
             </button>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
+                style={{ fontFamily: 'var(--font-geist-sans)' }}
+              >
+                Login
+              </Link>
+            </>
           )}
           <Link
             href="/#contact"
@@ -135,21 +182,13 @@ export default function Navbar() {
             )}
 
             <Link href="/#contact" className="block py-2 font-semibold" onClick={close}>Contact</Link>
-            <div className="pt-2">
-              {session?.user ? (
-                <button
-                  onClick={() => { close(); signOut({ callbackUrl: "/" }); }}
-                  className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
-                >
-                  Sign out
-                </button>
+            <div className="pt-2 space-y-2">
+              {loggedIn ? (
+                <button onClick={async () => { close(); if (supabase) { await supabase.auth.signOut(); } }} className="block py-2 font-semibold">Logout</button>
               ) : (
-                <button
-                  onClick={() => { close(); signIn("google", { callbackUrl: "/" }); }}
-                  className="inline-flex items-center justify-center rounded-full px-4 py-2 text-white text-sm font-semibold transition-transform duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 shadow-md hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
-                >
-                  Sign in with Google
-                </button>
+                <>
+                  <Link href="/login" className="block py-2 font-semibold" onClick={close}>Login</Link>
+                </>
               )}
               <div className="mt-2">
                 <Link
