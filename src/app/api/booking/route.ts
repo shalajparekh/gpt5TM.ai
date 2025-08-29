@@ -124,6 +124,33 @@ function createMailTransport() {
   return nodemailer.createTransport({ host, port, secure, auth: { user, pass } });
 }
 
+function getErrorMessage(err: unknown, fallback: string): string {
+  if (err instanceof Error && err.message) return err.message;
+  try {
+    const anyErr = err as { message?: string };
+    if (anyErr && typeof anyErr.message === 'string' && anyErr.message) return anyErr.message;
+  } catch {}
+  return fallback;
+}
+
+function getGoogleErrorInfo(err: unknown): { status: number; message: string } {
+  // Attempt to extract Google API error shape
+  const fallback = { status: 500, message: 'Google Calendar error' };
+  try {
+    const anyErr = err as {
+      code?: number;
+      errors?: Array<{ message?: string }>;
+      response?: { status?: number; data?: { error?: { message?: string } } };
+      message?: string;
+    };
+    const status = anyErr?.response?.status || anyErr?.code || 500;
+    const message = anyErr?.errors?.[0]?.message || anyErr?.response?.data?.error?.message || anyErr?.message || fallback.message;
+    return { status, message };
+  } catch {
+    return fallback;
+  }
+}
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -143,7 +170,7 @@ export async function GET(req: Request) {
     let busy: { start: Date; end: Date }[] = [];
     try {
       busy = await listBusyForDay(calendarId, ymd);
-    } catch (e) {
+    } catch {
       // Fallback to showing all slots as available if Calendar API is misconfigured
       busy = [];
     }
@@ -189,7 +216,7 @@ export async function POST(req: Request) {
     try {
       const auth = getOAuthClient();
       calendar = google.calendar({ version: "v3", auth });
-    } catch (e) {
+    } catch {
       return NextResponse.json({ error: "Google Calendar auth failed. Check GOOGLE_* env vars." }, { status: 500 });
     }
     const summary = `Discovery call with ${name}`;
@@ -214,10 +241,9 @@ export async function POST(req: Request) {
           reminders: { useDefault: true },
         },
       });
-    } catch (e: any) {
-      const code = e?.code || e?.response?.status || 500;
-      const googleMsg = e?.errors?.[0]?.message || e?.response?.data?.error?.message || e?.message || "Google Calendar error";
-      return NextResponse.json({ error: googleMsg }, { status: code });
+    } catch (err: unknown) {
+      const { status, message } = getGoogleErrorInfo(err);
+      return NextResponse.json({ error: message }, { status });
     }
 
     const event = insert.data;
@@ -273,8 +299,8 @@ export async function POST(req: Request) {
           await transporter.sendMail({ from, to: notifyTo, subject, text: plain, html });
         }
         emailSent = true;
-      } catch (e: any) {
-        emailError = e?.message || "SMTP send failed";
+      } catch (err: unknown) {
+        emailError = getErrorMessage(err, "SMTP send failed");
       }
     } else {
       emailError = "SMTP not configured (check ZOHO_SMTP_* and MAIL_FROM env vars)";
