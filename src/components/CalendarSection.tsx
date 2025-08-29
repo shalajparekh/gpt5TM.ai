@@ -106,7 +106,7 @@ export default function CalendarSection() {
   }
 
   return (
-    <section id="calendar" className="relative w-full py-24">
+    <section id="calendar" className="relative w-full py-24" suppressHydrationWarning>
       {/* Soothing, subtle background for this section */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-zinc-50 to-white dark:from-zinc-900 dark:to-black" />
