@@ -144,8 +144,8 @@ export default function ChatWidget() {
         onClick={toggleOpen}
         aria-expanded={open}
         aria-label={open ? "Close chat" : "Open chat"}
-        className={`group z-[70] h-[72px] w-[72px] rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl transition-transform duration-200 hover:scale-110 active:scale-95 grid place-items-center relative overflow-visible`}
-        style={{ position: 'fixed', left: 24, bottom: 24 }}
+        className={`group z-[70] h-[64px] w-[64px] md:h-[72px] md:w-[72px] rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl transition-transform duration-200 hover:scale-110 active:scale-95 grid place-items-center relative overflow-visible`}
+        style={{ position: 'fixed', left: 16, bottom: 16 }}
       >
         {/* Halo effects */}
         <span className="pointer-events-none absolute inset-0 rounded-full bg-white/10 blur-md" />
@@ -157,48 +157,94 @@ export default function ChatWidget() {
       </button>
 
       {showPanel && (
-        <div className={`z-[70] rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transform transition-all duration-300 ${closing ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}
-          style={{ position: 'fixed', left: 24, bottom: 24 + 72 + 16, width: '40vw', height: '50vh' }}
-        >
-          <div className="px-4 py-3 border-b border-black/10 dark:border-white/10 text-sm font-semibold">NeshTech Assistant</div>
-          <div ref={listRef} className="chat-scroll h-[calc(50vh-112px)] overflow-y-auto p-4 space-y-3 text-sm">
-            {messages.length === 0 && (
-              <div className="text-zinc-500">Hi! Ask us about services, pricing, or bookings.</div>
-            )}
-            {messages.map((m) => (
-              <div key={m.id} className={m.role === "user" ? "text-right" : "text-left"}>
-                <div className={`inline-block px-3 py-2 rounded-2xl whitespace-pre-line break-words ${m.role === "user" ? "bg-blue-600 text-white" : "bg-zinc-100 dark:bg-zinc-800"}`}>
-                  {m.content}
+        <>
+          {/* Mobile bottom sheet */}
+          <div className={`md:hidden z-[70] rounded-t-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transform transition-all duration-300 ${closing ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}
+            style={{ position: 'fixed', left: 0, right: 0, bottom: 0, width: '100vw', height: '75vh' }}
+          >
+            <div className="h-3 w-10 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mt-2" />
+            <div className="px-4 py-3 border-b border-black/10 dark:border-white/10 text-sm font-semibold">NeshTech Assistant</div>
+            <div ref={listRef} className="chat-scroll h-[calc(75vh-152px)] overflow-y-auto p-3 space-y-3 text-sm">
+              {messages.length === 0 && (
+                <div className="text-zinc-500">Hi! Ask us about services, pricing, or bookings.</div>
+              )}
+              {messages.map((m) => (
+                <div key={m.id} className={m.role === "user" ? "text-right" : "text-left"}>
+                  <div className={`inline-block px-3 py-2 rounded-2xl whitespace-pre-line break-words ${m.role === "user" ? "bg-blue-600 text-white" : "bg-zinc-100 dark:bg-zinc-800"}`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              {busy && <div className="text-zinc-500">Typing…</div>}
+              {error && <div className="text-red-600">{error}</div>}
+            </div>
+            <div className="p-3 flex gap-2 items-end pb-[calc(env(safe-area-inset-bottom)+8px)]">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={onKey}
+                placeholder="Type your message"
+                className="flex-1 rounded-xl border border-black/20 dark:border-white/20 px-3 py-3 text-base bg-white dark:bg-zinc-900"
+              />
+              <button onClick={send} disabled={busy || !input.trim()} className="rounded-xl px-4 py-3 text-base bg-blue-600 text-white disabled:opacity-60 transition-transform duration-200 hover:scale-105 active:scale-95">Send</button>
+            </div>
+            {confirmExit && (
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="w-[min(90%,320px)] rounded-xl bg-white dark:bg-zinc-800 p-4 text-sm shadow-xl border border-black/10 dark:border-white/10">
+                  <p className="font-semibold">Close chat?</p>
+                  <p className="mt-1 text-zinc-600 dark:text-zinc-300">Your messages will be kept for this session.</p>
+                  <div className="mt-4 flex gap-2 justify-end">
+                    <button onClick={() => setConfirmExit(false)} className="rounded-lg px-3 py-1.5 border border-black/10 dark:border-white/20">Keep chatting</button>
+                    <button onClick={() => { setConfirmExit(false); setOpen(false); }} className="rounded-lg px-3 py-1.5 bg-blue-600 text-white">Close chat</button>
+                  </div>
                 </div>
               </div>
-            ))}
-            {busy && <div className="text-zinc-500">Typing…</div>}
-            {error && <div className="text-red-600">{error}</div>}
-          </div>
-          <div className="p-4 flex gap-2">
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKey}
-              placeholder="Type your message"
-              className="flex-1 rounded-xl border border-black/20 dark:border-white/20 px-3 py-2 text-sm bg-white dark:bg-zinc-900"
-            />
-            <button onClick={send} disabled={busy || !input.trim()} className="rounded-xl px-4 py-2 text-sm bg-blue-600 text-white disabled:opacity-60 transition-transform duration-200 hover:scale-105 active:scale-95">Send</button>
+            )}
           </div>
 
-          {confirmExit && (
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <div className="w-[min(90%,320px)] rounded-xl bg-white dark:bg-zinc-800 p-4 text-sm shadow-xl border border-black/10 dark:border-white/10">
-                <p className="font-semibold">Close chat?</p>
-                <p className="mt-1 text-zinc-600 dark:text-zinc-300">Your messages will be kept for this session.</p>
-                <div className="mt-4 flex gap-2 justify-end">
-                  <button onClick={() => setConfirmExit(false)} className="rounded-lg px-3 py-1.5 border border-black/10 dark:border-white/20">Keep chatting</button>
-                  <button onClick={() => { setConfirmExit(false); setOpen(false); }} className="rounded-lg px-3 py-1.5 bg-blue-600 text-white">Close chat</button>
+          {/* Desktop panel */}
+          <div className={`hidden md:block z-[70] rounded-2xl border border-black/10 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-2xl overflow-hidden transform transition-all duration-300 ${closing ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"}`}
+            style={{ position: 'fixed', left: 24, bottom: 24 + 72 + 16, width: '40vw', height: '50vh' }}
+          >
+            <div className="px-4 py-3 border-b border-black/10 dark:border-white/10 text-sm font-semibold">NeshTech Assistant</div>
+            <div ref={listRef} className="chat-scroll h-[calc(50vh-112px)] overflow-y-auto p-4 space-y-3 text-sm">
+              {messages.length === 0 && (
+                <div className="text-zinc-500">Hi! Ask us about services, pricing, or bookings.</div>
+              )}
+              {messages.map((m) => (
+                <div key={m.id} className={m.role === "user" ? "text-right" : "text-left"}>
+                  <div className={`inline-block px-3 py-2 rounded-2xl whitespace-pre-line break-words ${m.role === "user" ? "bg-blue-600 text-white" : "bg-zinc-100 dark:bg-zinc-800"}`}>
+                    {m.content}
+                  </div>
+                </div>
+              ))}
+              {busy && <div className="text-zinc-500">Typing…</div>}
+              {error && <div className="text-red-600">{error}</div>}
+            </div>
+            <div className="p-4 flex gap-2">
+              <input
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={onKey}
+                placeholder="Type your message"
+                className="flex-1 rounded-xl border border-black/20 dark:border-white/20 px-3 py-2 text-sm bg-white dark:bg-zinc-900"
+              />
+              <button onClick={send} disabled={busy || !input.trim()} className="rounded-xl px-4 py-2 text-sm bg-blue-600 text-white disabled:opacity-60 transition-transform duration-200 hover:scale-105 active:scale-95">Send</button>
+            </div>
+            {confirmExit && (
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="w-[min(90%,320px)] rounded-xl bg-white dark:bg-zinc-800 p-4 text-sm shadow-xl border border-black/10 dark:border-white/10">
+                  <p className="font-semibold">Close chat?</p>
+                  <p className="mt-1 text-zinc-600 dark:text-zinc-300">Your messages will be kept for this session.</p>
+                  <div className="mt-4 flex gap-2 justify-end">
+                    <button onClick={() => setConfirmExit(false)} className="rounded-lg px-3 py-1.5 border border-black/10 dark:border-white/20">Keep chatting</button>
+                    <button onClick={() => { setConfirmExit(false); setOpen(false); }} className="rounded-lg px-3 py-1.5 bg-blue-600 text-white">Close chat</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
-        </div>
+            )}
+          </div>
+        </>
       )}
     </>,
     document.body
