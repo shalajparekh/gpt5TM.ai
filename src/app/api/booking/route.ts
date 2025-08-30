@@ -232,15 +232,15 @@ export async function POST(req: Request) {
     try {
       insert = await calendar.events.insert({
         calendarId,
-        requestBody: {
+          requestBody: {
           summary,
           description: descriptionLines.join("\n"),
           start: { dateTime: start.toISOString(), timeZone: "Asia/Kolkata" },
           end: { dateTime: end.toISOString(), timeZone: "Asia/Kolkata" },
           attendees: [{ email }],
           reminders: { useDefault: true },
-        },
-      });
+          },
+        });
     } catch (err: unknown) {
       const { status, message } = getGoogleErrorInfo(err);
       return NextResponse.json({ error: message }, { status });
@@ -299,7 +299,7 @@ export async function POST(req: Request) {
           await transporter.sendMail({ from, to: notifyTo, subject, text: plain, html });
         }
         emailSent = true;
-      } catch (err: unknown) {
+    } catch (err: unknown) {
         emailError = getErrorMessage(err, "SMTP send failed");
       }
     } else {

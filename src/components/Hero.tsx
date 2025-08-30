@@ -2,7 +2,7 @@
 
 export default function Hero() {
   return (
-    <section className="relative w-full">
+    <section id="hero" className="relative w-full">
       <div className="mx-auto max-w-[90%] px-4">
         <div className="relative overflow-hidden rounded-3xl border border-black/10 dark:border-white/10 shadow-2xl md:shadow-[0_40px_120px_rgba(0,0,0,0.35)]">
           <div className="grid grid-cols-1 lg:grid-cols-12">
