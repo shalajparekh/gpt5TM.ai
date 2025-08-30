@@ -19,20 +19,20 @@ function pickReply(payload: unknown): string {
   try {
     if (payload == null) return "";
     if (typeof payload === "string") return payload;
-    const o = payload as Record<string, any>;
+    const o = payload as Record<string, unknown>;
     const direct = ["reply", "text", "message", "result", "output", "content", "answer"]
-      .map((k) => o?.[k])
+      .map((k) => (o as Record<string, unknown>)?.[k])
       .find((v) => typeof v === "string" && v.trim().length > 0);
     if (typeof direct === "string") return direct;
     const nested = [
-      o?.data,
-      o?.data?.text,
-      o?.data?.reply,
-      o?.response,
-      o?.response?.text,
-      o?.output?.text,
-      o?.choices?.[0]?.message?.content,
-      o?.messages?.[0]?.content,
+      (o as any)?.data,
+      (o as any)?.data?.text,
+      (o as any)?.data?.reply,
+      (o as any)?.response,
+      (o as any)?.response?.text,
+      (o as any)?.output?.text,
+      (o as any)?.choices?.[0]?.message?.content,
+      (o as any)?.messages?.[0]?.content,
     ].find((v) => typeof v === "string" && v.trim().length > 0);
     if (typeof nested === "string") return nested;
     return "";
@@ -71,11 +71,11 @@ export async function POST(req: Request) {
       // Read as text first, then try JSON; some n8n Respond nodes return text/plain
       const rawText = await r.text();
       let j: Partial<N8nResponse> | { error?: string } = {};
-      try { j = rawText ? (JSON.parse(rawText) as any) : {}; } catch {}
+      try { j = rawText ? (JSON.parse(rawText) as Partial<N8nResponse> | { error?: string }) : {}; } catch {}
       return { r, j, rawText };
     }
 
-    let { r: res1, j: data1, rawText: raw1 } = await callWebhook(n8nUrl);
+    const { r: res1, j: data1, rawText: raw1 } = await callWebhook(n8nUrl);
     // If the test URL is used but workflow is not in test mode, n8n returns 404. Try production URL variant automatically.
     if (res1.status === 404 && n8nUrl.includes("/webhook-test/")) {
       const prodUrl = n8nUrl.replace("/webhook-test/", "/webhook/");

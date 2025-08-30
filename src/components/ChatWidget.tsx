@@ -40,7 +40,7 @@ export default function ChatWidget() {
       const t = setTimeout(() => { setShowPanel(false); setClosing(false); }, 300);
       return () => clearTimeout(t);
     }
-  }, [open]);
+  }, [open, showPanel]);
 
   async function send() {
     if (!input.trim() || busy) return;
@@ -63,25 +63,26 @@ export default function ChatWidget() {
         body: JSON.stringify(payload),
       });
 
-      const data = await res.json().catch(() => ({} as any));
-      if (!res.ok) throw new Error((data as any)?.error || "Chat failed");
+      const data: unknown = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error((data as { error?: string })?.error || "Chat failed");
 
-      const pick = (p: any): string => {
+      const pick = (p: unknown): string => {
         try {
           if (!p) return "";
           if (typeof p === "string") return p;
+          const o = p as Record<string, unknown>;
           const direct = ["reply","text","message","result","output","content","answer"]
-            .map((k) => p?.[k])
+            .map((k) => (o as Record<string, unknown>)?.[k])
             .find((v) => typeof v === "string" && v.trim().length > 0);
           if (typeof direct === "string") return direct;
           const nested = [
-            p?.data,
-            p?.data?.text,
-            p?.data?.reply,
-            p?.response?.text,
-            p?.output?.text,
-            p?.choices?.[0]?.message?.content,
-            p?.messages?.[0]?.content,
+            (o as any)?.data,
+            (o as any)?.data?.text,
+            (o as any)?.data?.reply,
+            (o as any)?.response?.text,
+            (o as any)?.output?.text,
+            (o as any)?.choices?.[0]?.message?.content,
+            (o as any)?.messages?.[0]?.content,
           ].find((v) => typeof v === "string" && v.trim().length > 0);
           if (typeof nested === "string") return nested;
           return "";

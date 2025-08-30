@@ -35,7 +35,6 @@ export default function CalendarSection() {
     const [y, m, d] = iso.split("-").map((n) => Number(n));
     return new Date(Number(y), (Number(m) || 1) - 1, Number(d) || 1, 0, 0, 0, 0);
   }, [day]);
-  const isSunday = selectedDate.getDay() === 0;
   const canBook = Boolean(selectedStart && name && email && phone);
   const [dateTouched, setDateTouched] = useState(false);
   const todayMin = useMemo(() => new Date().toISOString().slice(0, 10), []);
