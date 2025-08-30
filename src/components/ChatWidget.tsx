@@ -4,6 +4,18 @@ import { createPortal } from "react-dom";
 
 type Msg = { id: string; role: "user" | "assistant"; content: string };
 
+type UnknownRecord = Record<string, unknown>;
+function getPath(obj: unknown, path: Array<string | number>): unknown {
+  if (obj == null) return undefined;
+  let cur: unknown = obj;
+  for (const key of path) {
+    if (typeof cur !== "object" || cur === null) return undefined;
+    const rec = cur as UnknownRecord;
+    cur = rec[String(key)];
+  }
+  return cur;
+}
+
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -63,7 +75,7 @@ export default function ChatWidget() {
         body: JSON.stringify(payload),
       });
 
-      const data: unknown = await res.json().catch(() => ({}));
+      const data: unknown = await res.json().catch(() => ({} as Record<string, unknown>));
       if (!res.ok) throw new Error((data as { error?: string })?.error || "Chat failed");
 
       const pick = (p: unknown): string => {
@@ -72,17 +84,17 @@ export default function ChatWidget() {
           if (typeof p === "string") return p;
           const o = p as Record<string, unknown>;
           const direct = ["reply","text","message","result","output","content","answer"]
-            .map((k) => (o as Record<string, unknown>)?.[k])
+            .map((k) => o?.[k])
             .find((v) => typeof v === "string" && v.trim().length > 0);
           if (typeof direct === "string") return direct;
           const nested = [
-            (o as any)?.data,
-            (o as any)?.data?.text,
-            (o as any)?.data?.reply,
-            (o as any)?.response?.text,
-            (o as any)?.output?.text,
-            (o as any)?.choices?.[0]?.message?.content,
-            (o as any)?.messages?.[0]?.content,
+            getPath(o, ["data"]),
+            getPath(o, ["data", "text"]),
+            getPath(o, ["data", "reply"]),
+            getPath(o, ["response", "text"]),
+            getPath(o, ["output", "text"]),
+            getPath(o, ["choices", 0, "message", "content"]),
+            getPath(o, ["messages", 0, "content"]),
           ].find((v) => typeof v === "string" && v.trim().length > 0);
           if (typeof nested === "string") return nested;
           return "";

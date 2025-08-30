@@ -15,25 +15,38 @@ type N8nResponse = {
   metadata?: Record<string, unknown>;
 };
 
+type UnknownRecord = Record<string, unknown>;
+function getPath(obj: unknown, path: Array<string | number>): unknown {
+  if (obj == null) return undefined;
+  let cur: unknown = obj;
+  for (const key of path) {
+    if (typeof cur !== "object" || cur === null) return undefined;
+    const rec = cur as UnknownRecord;
+    cur = rec[String(key)];
+  }
+  return cur;
+}
+
 function pickReply(payload: unknown): string {
   try {
     if (payload == null) return "";
     if (typeof payload === "string") return payload;
-    const o = payload as Record<string, unknown>;
+    const o = payload as UnknownRecord;
     const direct = ["reply", "text", "message", "result", "output", "content", "answer"]
-      .map((k) => (o as Record<string, unknown>)?.[k])
+      .map((k) => o?.[k])
       .find((v) => typeof v === "string" && v.trim().length > 0);
     if (typeof direct === "string") return direct;
-    const nested = [
-      (o as any)?.data,
-      (o as any)?.data?.text,
-      (o as any)?.data?.reply,
-      (o as any)?.response,
-      (o as any)?.response?.text,
-      (o as any)?.output?.text,
-      (o as any)?.choices?.[0]?.message?.content,
-      (o as any)?.messages?.[0]?.content,
-    ].find((v) => typeof v === "string" && v.trim().length > 0);
+    const nestedCandidates = [
+      getPath(o, ["data"]),
+      getPath(o, ["data", "text"]),
+      getPath(o, ["data", "reply"]),
+      getPath(o, ["response"]),
+      getPath(o, ["response", "text"]),
+      getPath(o, ["output", "text"]),
+      getPath(o, ["choices", 0, "message", "content"]),
+      getPath(o, ["messages", 0, "content"]),
+    ];
+    const nested = nestedCandidates.find((v) => typeof v === "string" && v.trim().length > 0);
     if (typeof nested === "string") return nested;
     return "";
   } catch {
@@ -63,7 +76,7 @@ export async function POST(req: Request) {
             "Content-Type": "application/json",
             "x-api-key": apiKey,
             "x-correlation-id": correlationId,
-          }).filter(([_, v]) => Boolean(v))
+          }).filter(([, v]) => Boolean(v))
         ),
         body: JSON.stringify(forwarded),
         cache: "no-store",
