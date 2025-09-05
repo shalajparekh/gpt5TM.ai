@@ -48,7 +48,7 @@ export default function ContactSection() {
                   <h3 className="font-semibold text-xl tracking-tight">Email us</h3>
                 </div>
                 <p className="mt-2 text-base text-zinc-600">Our friendly team is here to help.</p>
-                <a href="mailto:sales@neshtech.co.in" className="mt-1 block text-lg font-medium underline">admin@neshtech.co.in</a>
+                <a href="mailto:sales@neshtech.co.in" className="mt-1 block text-lg font-medium underline">hello@neshtech.co.in</a>
               </div>
               <div>
                 <div className="flex items-center gap-4">

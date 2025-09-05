@@ -27,10 +27,10 @@ export default function Footer() {
           <div>
             <div className="text-sm font-semibold text-zinc-700 dark:text-zinc-300">Contact</div>
             <ul className="mt-3 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
-              <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">admin@neshtech.co.in</a></li>
               <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">hello@neshtech.co.in</a></li>
+              <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">admin@neshtech.co.in</a></li>
               <li><a href="mailto:sales@neshtech.co.in" className="hover:underline">support@neshtech.co.in</a></li>
-              <li><a href="tel:+917760841075" className="hover:underline">+91 77608 41075</a></li>
+              <li><a href="tel:+917760841075" className="hover:underline">+91 7760841075</a></li>
               <li><span>Nesh Tech, B3-181, DLF Westend Heights DLF Newtown, Akshayanagar, Begur Hobli, Bangalore. PIN: 560068</span></li>
             </ul>
           </div>
