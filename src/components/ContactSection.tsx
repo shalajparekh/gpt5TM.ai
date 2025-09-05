@@ -48,25 +48,25 @@ export default function ContactSection() {
                   <h3 className="font-semibold text-xl tracking-tight">Email us</h3>
                 </div>
                 <p className="mt-2 text-base text-zinc-600">Our friendly team is here to help.</p>
-                <a href="mailto:sales@neshtech.co.in" className="mt-1 block text-lg font-medium underline">sales@neshtech.co.in</a>
+                <a href="mailto:sales@neshtech.co.in" className="mt-1 block text-lg font-medium underline">admin@neshtech.co.in</a>
               </div>
               <div>
                 <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-lg">📍</div>
+                <div className="h-10 w-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-lg">📞</div>
                   <h3 className="font-semibold text-xl tracking-tight">Call us</h3>
                 </div>
                 
                 <p className="mt-2 text-base text-zinc-600">Mon–Sat: 9am to 6pm. IST.</p>
-                <p className="mt-2 text-base text-zinc-600"> <strong>+91 77608 41075 </strong></p>
+                <p className="mt-2 text-base text-zinc-600"> <strong>+91 7760841075 </strong></p>
                 
               </div>
               <div>
                 <div className="flex items-center gap-4">
-                  <div className="h-10 w-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-lg">📞</div>
+                  <div className="h-10 w-10 rounded-xl border border-black/10 dark:border-white/10 flex items-center justify-center text-lg">📍</div>
                   <h3 className="font-semibold text-xl tracking-tight">Visit us</h3>
                 </div>
                 <p className="mt-2 text-base text-zinc-600"></p>
-                <a href="tel:+917760841075" className="mt-1 block text-lg font-medium underline">Nesh Tech Inc., DLF Newtown, Akshayanagar, Bangalore. 560068</a>
+                <a href="tel:+917760841075" className="mt-1 block text-lg font-medium underline">Nesh Tech, B3-181, DLF Westend Heights DLF Newtown, Akshayanagar, Begur Hobli, Bangalore. 560068</a>
                 {/* Small Google Map embed */}
                 <div className="mt-6 rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
                   <iframe

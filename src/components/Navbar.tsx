@@ -48,7 +48,7 @@ export default function Navbar() {
         <Link href="/" className="tracking-tight" aria-label="Nesh Tech Inc. home" style={{ fontFamily: 'var(--font-geist-sans)' }}>
           <span className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 font-extrabold text-lg md:text-xl">
             <Image src="/logo1.png" alt="Nesh Tech Inc." width={40} height={40} className="h-9 md:h-10 w-auto" priority />
-            NeshTech Inc.
+            Nesh Tech
           </span>
         </Link>
         {/* Desktop nav */}
