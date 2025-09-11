@@ -324,7 +324,7 @@ details: ["Record All Bookings - Google Sheets",
                       >
                         {isExpanded ? "Hide Details" : "Expand Features"}
                       </button>
-                      <a
+                      <Link
                         href="/#calendar"
                         aria-label="Book via calendar"
                         className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md transition-transform duration-200 hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95"
@@ -332,7 +332,7 @@ details: ["Record All Bookings - Google Sheets",
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
                           <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 01.97-.26c1.06.27 2.2.41 3.37.41a1 1 0 011 1V21a1 1 0 01-1 1C10.3 22 2 13.7 2 3a1 1 0 011-1h3.67a1 1 0 011 1c0 1.17.14 2.31.41 3.37a1 1 0 01-.26.97l-2.2 2.2z"/>
                         </svg>
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </article>
