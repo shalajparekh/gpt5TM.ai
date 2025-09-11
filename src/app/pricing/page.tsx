@@ -238,7 +238,7 @@ details: ["Record All Bookings - Google Sheets",
 
   return (
     <div className="mt-10" ref={wrapperRef}>
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3 md:gap-4">
         <button
           aria-label="Scroll left"
           onClick={() => scrollByCards(-1)}
@@ -247,11 +247,11 @@ details: ["Record All Bookings - Google Sheets",
           <span className="text-3xl">‹</span>
         </button>
         <div className="relative flex-1">
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-white to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-white to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-16 md:w-20 bg-gradient-to-r from-white to-transparent hidden sm:block" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-16 md:w-20 bg-gradient-to-l from-white to-transparent hidden sm:block" />
           <div
             ref={containerRef}
-            className="flex gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory px-1 py-1 noScrollbar"
+            className="flex gap-4 md:gap-6 overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory px-3 md:px-1 py-1 noScrollbar scroll-px-3"
           >
             {plans.map((p) => {
               const isExpanded = expanded === p.key;
@@ -276,9 +276,9 @@ details: ["Record All Bookings - Google Sheets",
                 <article
                   key={p.key}
                   data-card
-                  className={`snap-start relative rounded-3xl border border-black/10 bg-gradient-to-b from-violet-100 to-white p-6 shadow-xl flex-shrink-0 transition-all duration-200 min-h-[420px] ${
+                  className={`snap-center relative rounded-3xl border border-black/10 bg-gradient-to-b from-violet-100 to-white p-6 shadow-xl flex-shrink-0 transition-all duration-200 min-h-[420px] ${
                     isExpanded ? "scale-[1.03] shadow-2xl z-20" : "hover:shadow-2xl hover:-translate-y-1"
-                  } min-w-[85%] sm:min-w-[60%] md:min-w-[48%] lg:min-w-[32%] xl:min-w-[30%]`}
+                  } min-w-[92%] sm:min-w-[60%] md:min-w-[48%] lg:min-w-[32%] xl:min-w-[30%]`}
                 >
                   <div className="flex flex-col h-full">
                     <div className="text-2xl font-extrabold inline-flex items-center justify-center w-fit px-4 h-12 rounded-full bg-violet-100 text-violet-700">
