@@ -1,12 +1,12 @@
 "use client";
 import { useCart } from "@/contexts/CartContext";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 
 // const plans = [...] // reserved for future use
 
 export default function PricingPage() {
-  const { add, items, total, remove } = useCart();
+  const { items, total, remove } = useCart();
   return (
     <div className="min-h-screen w-full py-16 bg-gradient-to-b from-violet-50 to-white dark:from-zinc-950 dark:to-black">
       <div className="mx-auto max-w-[86.4rem] px-4">
@@ -96,12 +96,12 @@ export default function PricingPage() {
                 <div className="text-lg font-semibold">Total</div>
                 <div className="text-lg font-semibold">₹{total.toLocaleString('en-IN')}</div>
               </div>
-              <a href="/checkout" className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md transition-transform duration-200 hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95">
+              <Link href="/checkout" className="mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-md transition-transform duration-200 hover:shadow-[0_10px_30px_rgba(99,102,241,0.45)] hover:scale-105 active:scale-95">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true">
                   <path d="M7 4h-2l-1 2H2v2h2l3.6 7.59c.17.36.53.59.92.59H19v-2H9.42l-.28-.59L18 11c.38-.01.73-.25.88-.61L21 5H7V4zm16 15a2 2 0 11-4 0 2 2 0 014 0zm-10 0a2 2 0 11-4 0 2 2 0 014 0z"/>
                 </svg>
                 <span className="font-semibold">Go to checkout</span>
-              </a>
+              </Link>
             </>
           )}
         </div>
@@ -116,7 +116,6 @@ function ScrollablePlans() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
   const { add } = useCart();
-  const router = useRouter();
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
