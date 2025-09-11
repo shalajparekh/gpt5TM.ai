@@ -1,12 +1,17 @@
 "use client";
 
-// Open WhatsApp Web in a new tab as requested
-const waUrl = "https://web.whatsapp.com/";
+// Open WhatsApp chat with a specific number
+const PHONE_E164_NO_PLUS = "917760841075"; // India number in international format without '+'
 
 export default function WhatsAppButton() {
+  const isMobile = typeof navigator !== "undefined" && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const presetText = "Hi, I would like to know more.";
+  const waDesktopUrl = `https://web.whatsapp.com/send?phone=${PHONE_E164_NO_PLUS}&text=${encodeURIComponent(presetText)}`;
+  const waMobileUrl = `https://wa.me/${PHONE_E164_NO_PLUS}?text=${encodeURIComponent(presetText)}`;
+  const href = isMobile ? waMobileUrl : waDesktopUrl;
   return (
     <a
-      href={waUrl}
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"

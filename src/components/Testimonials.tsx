@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const testimonials = [
-  { name: "Nehal P.", role: "Cafe Owner, Indiranagar", company: "4th Wave Coffee", text: "Nesh Tech launched our website in just a few days. Online orders are already up by 34%! Their support is outstanding, led personally by the owner. We highly recommend them to any business going online.", img: "/images/1.png" },
+  { name: "Nehal", role: "Cafe Owner, Indiranagar", company: "4th Wave Coffee", text: "Nesh Tech launched our website in just a few days. Online orders are already up by 34%! Their support is outstanding, led personally by the owner. We highly recommend them to any business going online.", img: "/images/1.png" },
   { name: "Sharvil M.", role: "Boutique, Koramangala", company: "The Homegrown", text: "Setting up a WhatsApp catalog with UPI payments made our sales process seamless and hassle-free. Customers love the simplicity.WhatsApp catalog + UPI payments made sales effortless.", img: "/images/2.png" },
   { name: "Nirosha R.", role: "Fitness Studio, HSR", company: "Goldy's Gym", text: "Nesh Tech Ads and SEO campaigns delivered consistent leads, and the clear weekly reports kept us confident in the results.", img: "/images/3.png" },
   { name: "Ravindra R.", role: "Bakery, Jayanagar", company: "Saloni's Bakery", text: "Cart recovery emails helped us recover 18% of lost revenue. Nesh Tech made the entire process seamless and automated.", img: "/images/4.png" },

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import SalonCalendarDemo from "./SalonCalendarDemo";
 export const metadata = {
   title: "Salon, Spa & Wellness Demo — Nesh Tech Inc.",
   description:
@@ -101,6 +102,9 @@ export default function SalonDemoPage() {
           </div>
         </div>
       </section>
+
+      {/* Calendar (Demo) */}
+      <SalonCalendarDemo />
 
       {/* Indulge / About */}
       <section className="w-full py-16" id="about">

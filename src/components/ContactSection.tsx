@@ -66,7 +66,7 @@ export default function ContactSection() {
                   <h3 className="font-semibold text-xl tracking-tight">Visit us</h3>
                 </div>
                 <p className="mt-2 text-base text-zinc-600"></p>
-                <a href="tel:+917760841075" className="mt-1 block text-lg font-medium underline">Nesh Tech, B3-181, DLF Westend Heights DLF Newtown, Akshayanagar, Begur Hobli, Bangalore. 560068</a>
+                <a href="tel:+917760841075" className="mt-1 block text-lg font-medium underline">Nesh Tech, DLF Newtown, Akshayanagar, Begur Hobli, Bangalore. 560068</a>
                 {/* Small Google Map embed */}
                 <div className="mt-6 rounded-xl overflow-hidden border border-black/10 dark:border-white/10">
                   <iframe
